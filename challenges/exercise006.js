@@ -12,6 +12,17 @@
  */
 export const sumMultiples = (arr) => {
 	if (arr === undefined) throw new Error('arr is required');
+	let sum =0;
+	for (let i=0; i< arr.length; i++)
+
+	{
+		if(arr[i]% 3 === 0 || arr[i] % 5 === 0) 
+	{sum += arr[i];
+	}
+}
+return sum;
+
+
 };
 
 /**
@@ -21,6 +32,15 @@ export const sumMultiples = (arr) => {
  */
 export const isValidDNA = (str) => {
 	if (str === undefined) throw new Error('str is required');
+	const validCharacters = ['C', 'G', 'T', 'A'];
+	for (let i=0;i<str.length; i++)
+	{
+		if(!validCharacters.includes(str[i]))
+		{
+			return false;
+		}
+	}
+	return true;
 };
 
 /**
@@ -30,6 +50,22 @@ export const isValidDNA = (str) => {
  */
 export const getComplementaryDNA = (str) => {
 	if (str === undefined) throw new Error('str is required');
+	let complementaryStr = '';
+	for (let i=0; i < str.length; i++){
+		const currentChar = str[i];
+		if (currentChar === 'A'){
+			complementaryStr += 'T';
+		}
+		else if (currentChar === 'T'){
+			complementaryStr += 'A';
+		}
+		else if (currentChar === 'C'){
+			complementaryStr += 'G';
+		}
+		else if (currentChar === 'G'){
+			complementaryStr += 'C';
+		}
+	} return complementaryStr;
 };
 
 /**
@@ -39,6 +75,19 @@ export const getComplementaryDNA = (str) => {
  */
 export const isItPrime = (n) => {
 	if (n === undefined) throw new Error('n is required');
+	
+	if (n <= 1){
+		return false;
+	}
+	else if(n > 1){
+
+		for(let i= 2; i< n;i++){
+			if(n % i === 0){
+				return false;
+			}
+		}
+	}
+	return true;
 };
 
 /**
@@ -55,6 +104,12 @@ export const isItPrime = (n) => {
 export const createMatrix = (n, fill) => {
 	if (n === undefined) throw new Error('n is required');
 	if (fill === undefined) throw new Error('fill is required');
+	const matrix =[];
+	for (let i= 0; i < n; i++)
+	{
+		const row = Array(n).fill(fill);
+		matrix.push(row);
+	} return matrix;
 };
 
 /**
@@ -72,4 +127,18 @@ export const createMatrix = (n, fill) => {
 export const areWeCovered = (staff, day) => {
 	if (staff === undefined) throw new Error('staff is required');
 	if (day === undefined) throw new Error('day is required');
+	let scheduledStaffCount = 0;
+	for (let i=0; i< staff.length; i++){
+		const staffMember = staff[i];
+		const rota = staffMember.rota;
+		for(let j=0; j<rota.length; j++){
+			if(rota[j] === day){
+				scheduledStaffCount++;
+				break;
+			}
+		}
+	}
+	return scheduledStaffCount >= 3;
+
+
 };
